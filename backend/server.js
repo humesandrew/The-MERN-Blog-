@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 
+// use mongoose, an ODM library (object-database-modelling) which allows us to use methods (post, patch, etc) //
+// to read and write database documents. It also allows to use schemas and models for more accuracy //
+const mongoose = require('mongoose');
+
 const blogRoutes = require('./routes/blogs');
 
 // require .env// 
@@ -18,7 +22,16 @@ app.use(express.json());
 //prepend api/blogs to all requests to blogRoutes// 
 app.use('/api/blogs', blogRoutes);
 
-app.listen(process.env.PORT, () => {
-    console.log('Listening on port ' + process.env.PORT);
-})
+
+// connect to db now using mongoose, and make sure db is connected before we listen to requests// 
+mongoose.connect(process.env.MONGO_URI)
+ .then(() => {app.listen(process.env.PORT, () => {
+    console.log('Connected to db & listening on port ' + process.env.PORT);
+})})
+ .catch((error) => {
+    console.log(error);
+ })
+
+
+
 

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const blogRoutes = require('./routes/blogs');
+
 // require .env// 
 require('dotenv').config();
 // add middleware, in this case the 'next' package to log our requests// 
@@ -9,15 +11,12 @@ app.use((req, res, next) => {
     console.log("Path is '" + req.path + "',", "Method is " + req.method);
     next();
 })
+// add middleware (express.json) which allows us to access req.body for request data // 
+app.use(express.json());
 
 
-// route handler to respond to requests (generic for now) // 
-app.get('/', (req, res) => {
-    res.json({message: "welcome to the app!"});
-})
-
-
-
+//prepend api/blogs to all requests to blogRoutes// 
+app.use('/api/blogs', blogRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log('Listening on port ' + process.env.PORT);

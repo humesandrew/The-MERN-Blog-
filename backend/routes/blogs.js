@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const Blog = require('../models/blogModel');
 //so the home route ('/') is prepended with '/api/blogs' ///
 
 
@@ -15,8 +15,18 @@ router.get('/:id', (req, res) => {
 });
 
 // to POST a single blog ///
-router.post('/:id', (req, res) => {
-    res.json({message: "POST a single blog"})
+// use model to add new document to blogs db collection// 
+router.post('/', async (req, res) => {
+    const {title, reps, load} = req.body
+
+    try {
+        const blog = await Blog.create({title, load, reps})
+        res.status(200).json(blog)
+    }
+    catch (error) {
+        res.status(400).json({error: error.message})
+    }
+
 });
 
 

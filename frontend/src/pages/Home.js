@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
+//components//
+import BlogDetails from '../components/blogdetails/BlogDetails';
+
 const Home = () => {
   // the java script logic goes first //
   const [blogs, setBlogs] = useState(null);
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await fetch("https:/localhost:4000/api/blogs");
+      const response = await fetch("/api/blogs");
       const json = await response.json();
 
       if (response.ok) {
@@ -28,7 +31,8 @@ const Home = () => {
         {/* // we will add javascript logic to the component  using single curlies // */}
         {blogs &&
           blogs.map((blog) => (
-            <p key={blog._id}>{blog.title}</p>
+        // we passed in the key which we require and the blog as a prop, so we can access the props inside this component//
+            <BlogDetails key={blog._id} blog={blog} />
             // because p needs a unique key in react (bc its a child i think)//
           ))}
       </div>

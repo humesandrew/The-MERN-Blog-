@@ -1,33 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const Blog = require('../models/blogModel');
+const {
+    getBlogs,
+    getBlog,
+    createBlog
+} = require('../controllers/blogController')
 //so the home route ('/') is prepended with '/api/blogs' ///
 
 
 // to GET all blogs //
-router.get('/', (req, res) => {
-    res.json({message: "GET all blogs"})
-});
+// we just going to use getBlogs because that has our find({}) fxn (in the controller) //
+router.get('/', getBlogs);
 
 // to GET a single blog //
-router.get('/:id', (req, res) => {
-    res.json({message: "GET single blog"})
-});
+router.get('/:id', getBlog);
 
 // to POST a single blog ///
 // use model to add new document to blogs db collection// 
-router.post('/', async (req, res) => {
-    const {title, reps, load} = req.body
-
-    try {
-        const blog = await Blog.create({title, load, reps})
-        res.status(200).json(blog)
-    }
-    catch (error) {
-        res.status(400).json({error: error.message})
-    }
-
-});
+//then i cleaned this up by creating controllers, moving this fxn to only the controller // 
+router.post('/', createBlog);
 
 
 // to UPDATE a single blog //

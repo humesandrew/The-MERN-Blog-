@@ -1,22 +1,80 @@
-
-
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 
 import './blogdetails.css';
 
-const BlogDetails = ({ blog }) => {
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+}));
 
-// here we are destructing from the props the props that we pass thru (the blog object, which has title, id, load, etc)//
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
 
-return(
-<div className="blogDetails">
-    <h1>{blog.title}</h1>
-    <p><strong>Load (lbs): </strong>{blog.load}</p>
-    <p><strong>Reps: </strong>{blog.load}</p>
-    <p>{blog.createdAt}</p>
-</div>
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
 
-)
+export default function BlogDetails({ blog }) {
+  const [expanded, setExpanded] = React.useState('panel1');
 
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  return (
+    <div>
+        <Container>
+            <Paper elevation={2}>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography className="postedDiv">{blog.title}  
+        <p>Posted at: {blog.createdAt}</p> </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+           Load (lbs): {blog.load}
+          </Typography>
+          <Typography>
+           Reps: {blog.reps}
+          </Typography>
+        </AccordionDetails>
+       
+      </Accordion>
+      </Paper>
+      <br></br>
+      </Container>
+    </div>
+  );
 }
-
-export default BlogDetails

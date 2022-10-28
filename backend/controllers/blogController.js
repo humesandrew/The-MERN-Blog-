@@ -47,12 +47,40 @@ const {title, reps, load} = req.body
     }}
 
 //Controller for PATCH single // 
+const updateBlog = async (req, res) => {
+    const { id } = req.params
 
+    if  (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Blog not found' })
+}
+const blog = await Blog.findOneAndUpdate({_id: id}, {...req.body})
+  
+if (!blog) {
+    res.status(400).json({message: 'Blog not found'})
+}
+res.status(200).json(blog)
+}
 
 // Controller for DELETE single // 
+const deleteBlog = async (req, res) => {
+    const { id } = req.params
 
+    if  (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Blog not found' })
+}
+const blog = await Blog.findOneAndDelete({_id: id});
+
+if (!blog) {
+    return res.status(400).json({ message: 'Blog not found' })
+}
+res.status(200).json(blog)
+// so find a single blog with the id we supplied, but in Mongo its stored as _id // 
+}
 
 module.exports = { 
     getBlogs,
     getBlog,
-    createBlog }
+    createBlog,
+    deleteBlog,
+    updateBlog
+     }

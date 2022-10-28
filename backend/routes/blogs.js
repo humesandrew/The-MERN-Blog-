@@ -4,7 +4,9 @@ const Blog = require('../models/blogModel');
 const {
     getBlogs,
     getBlog,
-    createBlog
+    createBlog,
+    deleteBlog, 
+    updateBlog
 } = require('../controllers/blogController')
 //so the home route ('/') is prepended with '/api/blogs' ///
 
@@ -23,12 +25,9 @@ router.post('/', createBlog);
 
 
 // to UPDATE a single blog //
-router.patch('/:id', (req, res) => {
-    res.json({message: "UDPATE a single blog"})
-});
+router.patch('/:id', updateBlog);
 
 // to DELETE a single blog //
-router.delete('/:id', (req, res) => {
-    res.json({message: "DELETE a single blog"})
-});
+router.delete('/:id', deleteBlog);
+
 module.exports = router;

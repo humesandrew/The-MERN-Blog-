@@ -35,11 +35,11 @@ const getBlog = async (req, res) => {
 //add document to db via this controller// 
 // this is a better organized practice
 const createBlog = async (req, res) => {
-const {title, reps, load} = req.body
+const {title, body, author} = req.body
 
 
     try {
-        const blog = await Blog.create({title, load, reps})
+        const blog = await Blog.create({title, body, author})
         res.status(200).json(blog)
     }
     catch (error) {

@@ -5,12 +5,13 @@ const blogsSchema = new Schema({
         type: String,
         required: true
     }, 
-    reps: {
-        type: Number,
-        required: true
+    body: {
+        type: String,
+        required: true,
+       
     }, 
-    load: {
-        type: Number,
+    author: {
+        type: String,
         required: true
     }
 }, {

@@ -56,18 +56,20 @@ export default function BlogDetails({ blog }) {
   return (
     <div>
         <Container>
+  
             <Paper elevation={2}>
+          
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography className="postedDiv">{blog.title}  
+          <Typography className="postedDiv"> <strong>{blog.title}  </strong>
         <p>Posted at: {blog.createdAt}</p> </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-           Load (lbs): {blog.load}
+           {blog.body}
           </Typography>
           <Typography>
-           Reps: {blog.reps}
+           Written by: {blog.author}
           </Typography>
         </AccordionDetails>
        

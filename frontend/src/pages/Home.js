@@ -25,8 +25,9 @@ const Home = () => {
   // the component below //
   return (
     <div className="home">
-      <h1>All Blog Posts</h1>
+      
       <div className="blogs">
+    <h1>Welcome to the MERN Blog</h1>
         {/* //now we will map through all the blogs given as response.json // */}
         {/* // we will add javascript logic to the component  using single curlies // */}
         {blogs &&

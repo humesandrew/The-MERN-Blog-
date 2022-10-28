@@ -8,6 +8,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 
+
 import './blogdetails.css';
 
 const Accordion = styled((props) => (
@@ -56,7 +57,8 @@ export default function BlogDetails({ blog }) {
   return (
     <div>
         <Container>
-  
+     
+       
             <Paper elevation={2}>
           
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -75,6 +77,7 @@ export default function BlogDetails({ blog }) {
        
       </Accordion>
       </Paper>
+    
       <br></br>
       </Container>
     </div>

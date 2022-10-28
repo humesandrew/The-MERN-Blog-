@@ -44,7 +44,7 @@ const Home = () => {
     <h1>Welcome to the MERN Blog</h1>
     <Box sx={{ flexGrow: 1 }}>
    <Grid container spacing={2}>
-         <Grid item xs={3}>
+         <Grid item xs={12} md={3}>
           <Item>This will be add blog
         
           </Item>
@@ -52,7 +52,7 @@ const Home = () => {
         {/* //now we will map through all the blogs given as response.json // */}
         {/* // we will add javascript logic to the component  using single curlies // */}
        
-         <Grid item xs={9}>
+         <Grid item xs={12} md={9}>
           <Item>
         
         

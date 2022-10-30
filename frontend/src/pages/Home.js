@@ -3,9 +3,14 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+
 
 //components//
 import BlogDetails from '../components/blogdetails/BlogDetails';
+
+import './home.css';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -44,15 +49,17 @@ const Home = () => {
     <h1>Welcome to the MERN Blog</h1>
     <Box sx={{ flexGrow: 1 }}>
    <Grid container spacing={2}>
-         <Grid item xs={12} md={3}>
+         <Grid item xs={12} md={3} className="left">
+          
           <Item>This will be add blog
         
           </Item>
+         
           </Grid>
         {/* //now we will map through all the blogs given as response.json // */}
         {/* // we will add javascript logic to the component  using single curlies // */}
        
-         <Grid item xs={12} md={9}>
+         <Grid item xs={12} md={9} className="right">
           <Item>
         
         

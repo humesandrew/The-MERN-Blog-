@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 
 //components//
 import BlogDetails from '../components/blogdetails/BlogDetails';
-
+import BlogForm from '../components/blogform/BlogForm';
 import './home.css';
 
 
@@ -51,7 +51,8 @@ const Home = () => {
    <Grid container spacing={2}>
          <Grid item xs={12} md={3} className="left">
           
-          <Item>This will be add blog
+          <Item>
+            <BlogForm />
         
           </Item>
          

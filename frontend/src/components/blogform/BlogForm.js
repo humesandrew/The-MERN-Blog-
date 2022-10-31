@@ -7,16 +7,41 @@ import TextField from '@mui/material/TextField';
 import './blogform.css';
 
 
+
 export default function BlogForm() {
-    const [value, setValue] = React.useState('Controlled');
-    const handleChange = (event) => {
-        setValue(event.target.value);
-      };
+    const [title, setTitle] = React.useState('');
+    const [body, setBody] = React.useState('');
+    const [author, setAuthor] = React.useState('');
+    const [error, setError] = React.useState(null);
+   
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const blog = {title, body, author}
+        const response = await fetch('api/blogs/', {
+        method: 'POST', 
+        body: JSON.stringify(blog),
+        headers: {'Content-Type': 'application/json'}
+        }
+        )
+        const json = await response.json()
+        if (!response.ok) {
+            setError(json)
+        }
+        if (response.ok) {
+            setError(null);
+            console.log('new blog added successfully');
+            setTitle('');
+            setBody('');
+            setAuthor('');
+
+        }
+    }
 
       
     return (
       <Box
         component="form"
+      
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
         }}
@@ -35,20 +60,21 @@ export default function BlogForm() {
 <TextField id="outlined-basic" variant="outlined"  label="Blog Title"
           multiline
           maxRows={2}
-          value={value}
-          onChange={handleChange}/>
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}/>
    
         <TextField id="outlined-basic" variant="outlined"  label="Body"
           multiline
           rows={4}
-          value={value}
-          onChange={handleChange}/>
+          value={body}
+          onChange={(e) => setBody(e.target.value)}/>
 
   <TextField id="outlined-basic" variant="outlined"  label="Written by"
           
-          value={value}
-          onChange={handleChange}/>
-          <Button variant="contained">Submit</Button>
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}/>
+          <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+          {error && <div className='error'>{error}</div>}
       </Box>
     );
   }

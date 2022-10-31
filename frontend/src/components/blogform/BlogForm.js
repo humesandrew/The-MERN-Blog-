@@ -25,7 +25,7 @@ export default function BlogForm() {
         )
         const json = await response.json()
         if (!response.ok) {
-            setError(json)
+            setError(json.error)
         }
         if (response.ok) {
             setError(null);
@@ -47,6 +47,7 @@ export default function BlogForm() {
         }}
         noValidate
         autoComplete="off"
+        className='blogform'
       >
    <Typography
             variant="h5"

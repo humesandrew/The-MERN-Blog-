@@ -4,11 +4,12 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-
+import { useBlogsContext } from '../hooks/useBlogsContext';
 
 //components//
 import BlogDetails from '../components/blogdetails/BlogDetails';
 import BlogForm from '../components/blogform/BlogForm';
+
 import './home.css';
 
 
@@ -23,16 +24,22 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const Home = () => {
-  // the java script logic goes first //
-  const [blogs, setBlogs] = useState(null);
+ const {blogs, dispatch } = useBlogsContext();
 
   useEffect(() => {
     const fetchBlogs = async () => {
+
+
+  // to summarize, when we load this component we're fetching the blogs , then when the response//
+  // is ok and we get the json data, we're firing this dispatch, which in turn fires the // 
+  // blogReducer fxn and passes in the action (the typeof SET WORKOUTS and this payload of json)//
+  // so the whole object will go from property of null to whatever the payload is,//
+  //which is the entire array of blogs on the server//  
       const response = await fetch("/api/blogs");
       const json = await response.json();
 
       if (response.ok) {
-        setBlogs(json);
+        dispatch({type: 'SET_WORKOUTS', payload: json})
       }
     };
 

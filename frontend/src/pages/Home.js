@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { useBlogsContext } from '../hooks/useBlogsContext';
+
+// import { useBlogsContext } from '../hooks/useBlogsContext';
 
 //components//
 import BlogDetails from '../components/blogdetails/BlogDetails';
@@ -24,8 +24,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const Home = () => {
- const {blogs, dispatch } = useBlogsContext();
-
+//  const {blogs, dispatch} = useBlogsContext();
+const [blogs, setBlogs] = useState(null);
   useEffect(() => {
     const fetchBlogs = async () => {
 
@@ -39,14 +39,16 @@ const Home = () => {
       const json = await response.json();
 
       if (response.ok) {
-        dispatch({type: 'SET_WORKOUTS', payload: json})
+        // dispatch({type: 'SET_WORKOUTS', payload: json})
+        setWorkouts(json)
       }
-    };
+    }
 
     //fetchBlogs is the fxn argument in useEffect, so all the stuff above is just defining it. //
     // to look like useEffect(<function>, <dependency>), or in our case the function is fetchBlogs//
-    fetchBlogs();
-  }, []);
+    fetchBlogs()
+    
+  }, [] ) 
 
   // the component below //
   return (

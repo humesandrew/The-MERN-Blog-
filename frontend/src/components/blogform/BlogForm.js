@@ -56,7 +56,7 @@ export default function BlogForm() {
       <Typography
         variant="h5"
         noWrap
-        component="div"
+        component="span"
         sx={{
           flexGrow: 1,
           display: { xs: "none", sm: "block" },

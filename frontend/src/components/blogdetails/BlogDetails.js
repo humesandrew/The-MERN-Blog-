@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import { useBlogsContext } from "../../hooks/useBlogsContext";
 import "./blogdetails.css";
@@ -85,17 +85,17 @@ export default function BlogDetails({ blog }) {
               id="panel1d-header"
               sx={{ backgroundColor: "lightyellow" }}
             >
-              <Typography className="postedDiv">
+              <Typography className="postedDiv" component="div">
                 <strong>{blog.title} </strong>
-                <p>Posted at: {blog.createdAt}</p>{" "}
+                <p>Posted: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true})}</p>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="topDiv">
-                <Typography>{blog.body}</Typography>
+                <Typography component='div'>{blog.body}</Typography>
 
                 <div className="bottomDiv">
-                  <Typography sx={{ marginRight: 3 }}>
+                  <Typography sx={{ marginRight: 3 }} component='div'>
                     Written by: {blog.author}
                   </Typography>
                   <Chip

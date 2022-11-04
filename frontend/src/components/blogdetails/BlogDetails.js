@@ -9,13 +9,10 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import DeleteIcon from "@mui/icons-material/Delete";
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import { useBlogsContext } from "../../hooks/useBlogsContext";
 import "./blogdetails.css";
-
-
-
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -57,15 +54,14 @@ export default function BlogDetails({ blog }) {
   const { dispatch } = useBlogsContext();
   const [expanded, setExpanded] = React.useState(null);
   const handleDelete = async () => {
-    const response = await fetch('/api/blogs/' + blog._id, { 
-      method: 'DELETE'
-    })
+    const response = await fetch("/api/blogs/" + blog._id, {
+      method: "DELETE",
+    });
     const json = await response.json();
-    //the json data will be the document that was just deleted// 
-    if(response.ok) {
-      dispatch({type: 'DELETE_BLOG', payload: json});
-      //here we want to update our BlogsContext state (our global state)// 
-  
+    //the json data will be the document that was just deleted//
+    if (response.ok) {
+      dispatch({ type: "DELETE_BLOG", payload: json });
+      //here we want to update our BlogsContext state (our global state)//
     }
   };
   const handleChange = (panel) => (event, newExpanded) => {
@@ -87,15 +83,20 @@ export default function BlogDetails({ blog }) {
             >
               <Typography className="postedDiv" component="div">
                 <strong>{blog.title} </strong>
-                <p>Posted: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true})}</p>
+                <p>
+                  Posted:{" "}
+                  {formatDistanceToNow(new Date(blog.createdAt), {
+                    addSuffix: true,
+                  })}
+                </p>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="topDiv">
-                <Typography component='div'>{blog.body}</Typography>
+                <Typography component="div">{blog.body}</Typography>
 
                 <div className="bottomDiv">
-                  <Typography sx={{ marginRight: 3 }} component='div'>
+                  <Typography sx={{ marginRight: 3 }} component="div">
                     Written by: {blog.author}
                   </Typography>
                   <Chip

@@ -1,33 +1,31 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Blog = require('../models/blogModel');
+const Blog = require("../models/blogModel");
 const {
-    getBlogs,
-    getBlog,
-    createBlog,
-    deleteBlog, 
-    updateBlog
-} = require('../controllers/blogController')
+  getBlogs,
+  getBlog,
+  createBlog,
+  deleteBlog,
+  updateBlog,
+} = require("../controllers/blogController");
 //so the home route ('/') is prepended with '/api/blogs' ///
-
 
 // to GET all blogs //
 // we just going to use getBlogs because that has our find({}) fxn (in the controller) //
-router.get('/', getBlogs);
+router.get("/", getBlogs);
 
 // to GET a single blog //
-router.get('/:id', getBlog);
+router.get("/:id", getBlog);
 
 // to POST a single blog ///
-// use model to add new document to blogs db collection// 
-//then i cleaned this up by creating controllers, moving this fxn to only the controller // 
-router.post('/', createBlog);
-
+// use model to add new document to blogs db collection//
+//then i cleaned this up by creating controllers, moving this fxn to only the controller //
+router.post("/", createBlog);
 
 // to UPDATE a single blog //
-router.patch('/:id', updateBlog);
+router.patch("/:id", updateBlog);
 
 // to DELETE a single blog //
-router.delete('/:id', deleteBlog);
+router.delete("/:id", deleteBlog);
 
 module.exports = router;

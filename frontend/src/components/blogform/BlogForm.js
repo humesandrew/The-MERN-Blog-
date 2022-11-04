@@ -73,9 +73,9 @@ export default function BlogForm() {
         maxRows={2}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className={emptyFields.includes('title') ? 'errorForm' :''}
+        className={emptyFields.includes("title") ? "errorForm" : ""}
       />
-     
+
       <TextField
         id="outlined-basic"
         variant="outlined"
@@ -84,7 +84,7 @@ export default function BlogForm() {
         rows={4}
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        className={emptyFields.includes('body') ? 'errorForm' :''}
+        className={emptyFields.includes("body") ? "errorForm" : ""}
       />
       <TextField
         id="outlined-basic"
@@ -92,7 +92,7 @@ export default function BlogForm() {
         label="Written by"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
-        className={emptyFields.includes('author') ? 'errorForm' :''}
+        className={emptyFields.includes("author") ? "errorForm" : ""}
       />
       <Button variant="contained" onClick={handleSubmit}>
         Submit

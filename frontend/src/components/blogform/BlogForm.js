@@ -8,7 +8,8 @@ import TextField from '@mui/material/TextField';
 import { useBlogsContext } from '../../hooks/useBlogsContext';
 import './blogform.css';
 
-
+// this line const { dispatch } fixed it so that the db updates in sync, but still it throws the//
+// missing 'dispatch' dependency error// 
 
 export default function BlogForm() {
   const { dispatch } = useBlogsContext();

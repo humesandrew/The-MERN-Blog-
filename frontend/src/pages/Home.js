@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
-// import { useBlogsContext } from '../hooks/useBlogsContext';
+import { useBlogsContext } from '../hooks/useBlogsContext';
 
 //components//
 import BlogDetails from "../components/blogdetails/BlogDetails";
@@ -21,8 +21,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Home = () => {
-  //  const {blogs, dispatch} = useBlogsContext();
-  const [blogs, setBlogs] = useState(null);
+   const {blogs, dispatch} = useBlogsContext();
+  // const [blogs, setBlogs] = useState(null);
   useEffect(() => {
     const fetchBlogs = async () => {
       // to summarize, when we load this component we're fetching the blogs , then when the response//
@@ -34,8 +34,8 @@ const Home = () => {
       const json = await response.json();
 
       if (response.ok) {
-        // dispatch({type: 'SET_WORKOUTS', payload: json})
-        setBlogs(json);
+        dispatch({type: 'SET_BLOGS', payload: json})
+        // setBlogs(json);
       }
     };
 

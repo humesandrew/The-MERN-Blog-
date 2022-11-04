@@ -4,11 +4,14 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+
+import { useBlogsContext } from '../../hooks/useBlogsContext';
 import './blogform.css';
 
 
 
 export default function BlogForm() {
+  const { dispatch } = useBlogsContext();
     const [title, setTitle] = React.useState('');
     const [body, setBody] = React.useState('');
     const [author, setAuthor] = React.useState('');
@@ -33,6 +36,7 @@ export default function BlogForm() {
             setTitle('');
             setBody('');
             setAuthor('');
+            dispatch({type: 'CREATE_BLOG', payload: json});
 
         }
     }

@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import { useBlogsContext } from "../../hooks/useBlogsContext";
 import "./blogdetails.css";
@@ -87,7 +87,7 @@ export default function BlogDetails({ blog }) {
             >
               <Typography className="postedDiv">
                 <strong>{blog.title} </strong>
-                <p>Posted at: {blog.createdAt}</p>{" "}
+                <p>Posted: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true})}</p>{" "}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>

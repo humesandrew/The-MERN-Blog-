@@ -40,7 +40,7 @@ const [blogs, setBlogs] = useState(null);
 
       if (response.ok) {
         // dispatch({type: 'SET_WORKOUTS', payload: json})
-        setWorkouts(json)
+        setBlogs(json)
       }
     }
 
@@ -55,7 +55,7 @@ const [blogs, setBlogs] = useState(null);
     <div className="home">
       
       <div className="blogs">
-    <h1>Welcome to the MERN Blog</h1>
+    <div className="mernDiv"><h1>Welcome to the MERN Blog</h1></div>
     <Box sx={{ flexGrow: 1 }}>
    <Grid container spacing={2}>
          <Grid item xs={12} md={3} className="left">

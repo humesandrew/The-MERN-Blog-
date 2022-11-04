@@ -42,7 +42,7 @@ const Home = () => {
     //fetchBlogs is the fxn argument in useEffect, so all the stuff above is just defining it. //
     // to look like useEffect(<function>, <dependency>), or in our case the function is fetchBlogs//
     fetchBlogs();
-  }, []);
+  }, [dispatch]);
 
   // the component below //
   return (

@@ -85,17 +85,17 @@ export default function BlogDetails({ blog }) {
               id="panel1d-header"
               sx={{ backgroundColor: "lightyellow" }}
             >
-              <Typography className="postedDiv">
+              <Typography className="postedDiv" component="div">
                 <strong>{blog.title} </strong>
-                <p>Posted: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true})}</p>{" "}
+                <p>Posted: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true})}</p>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="topDiv">
-                <Typography>{blog.body}</Typography>
+                <Typography component='div'>{blog.body}</Typography>
 
                 <div className="bottomDiv">
-                  <Typography sx={{ marginRight: 3 }}>
+                  <Typography sx={{ marginRight: 3 }} component='div'>
                     Written by: {blog.author}
                   </Typography>
                   <Chip

@@ -10,11 +10,12 @@ import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+
+import { useBlogsContext } from "../../hooks/useBlogsContext";
 import "./blogdetails.css";
 
-const handleDelete = () => {
-  console.info("You clicked the delete icon.");
-};
+
+
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -53,8 +54,20 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function BlogDetails({ blog }) {
+  const { dispatch } = useBlogsContext();
   const [expanded, setExpanded] = React.useState("panel1");
-
+  const handleDelete = async () => {
+    const response = await fetch('/api/blogs/' + blog._id, { 
+      method: 'DELETE'
+    })
+    const json = await response.json();
+    //the json data will be the document that was just deleted// 
+    if(response.ok) {
+      dispatch({type: 'DELETE_BLOG', payload: json});
+      //here we want to update our BlogsContext state (our global state)// 
+  
+    }
+  };
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -87,6 +100,7 @@ export default function BlogDetails({ blog }) {
                   </Typography>
                   <Chip
                     label="Delete post"
+                    onClick={handleDelete}
                     onDelete={handleDelete}
                     deleteIcon={<DeleteIcon />}
                     variant="outlined"

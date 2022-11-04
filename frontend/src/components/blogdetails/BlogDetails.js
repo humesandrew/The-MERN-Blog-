@@ -14,12 +14,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./blogdetails.css";
 
-
-
-
-
 const handleDelete = () => {
-  console.info('You clicked the delete icon.');
+  console.info("You clicked the delete icon.");
 };
 
 const Accordion = styled((props) => (
@@ -72,43 +68,34 @@ export default function BlogDetails({ blog }) {
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
-          
           >
             <AccordionSummary
               aria-controls="panel1d-content"
               id="panel1d-header"
-              sx={{ backgroundColor: 'lightyellow' }}
+              sx={{ backgroundColor: "lightyellow" }}
             >
-              <Typography className="postedDiv" >
-             
+              <Typography className="postedDiv">
                 <strong>{blog.title} </strong>
-                
                 <p>Posted at: {blog.createdAt}</p>{" "}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <div className='topDiv'>
-              <Typography>{blog.body}</Typography>
-           
-              <div className="bottomDiv"> 
-            <Typography sx={{ marginRight: 3 }}>Written by: {blog.author}
-             
-            </Typography>
-      <Chip
-        label="Delete post"
- 
-        onDelete={handleDelete}
-      
-        deleteIcon={<DeleteIcon />}
-        variant="outlined"
-      ></Chip>
- 
-              
-              
-              </div>
+              <div className="topDiv">
+                <Typography>{blog.body}</Typography>
+
+                <div className="bottomDiv">
+                  <Typography sx={{ marginRight: 3 }}>
+                    Written by: {blog.author}
+                  </Typography>
+                  <Chip
+                    label="Delete post"
+                    onDelete={handleDelete}
+                    deleteIcon={<DeleteIcon />}
+                    variant="outlined"
+                  ></Chip>
+                </div>
               </div>
             </AccordionDetails>
-            
           </Accordion>
         </Paper>
 

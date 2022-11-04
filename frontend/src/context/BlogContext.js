@@ -17,6 +17,11 @@ export const blogsReducer = (state, action) => {
         // basically we're allowing access to global state, and it makes it easier//
         blogs: [action.payload, ...state.blogs],
       };
+      case "DELETE_BLOG":
+        return {
+            blogs: state.blogs.filter((b) => b._id !== action.payload._id)
+        }
+      
     default:
       return state;
   }

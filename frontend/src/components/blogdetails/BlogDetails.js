@@ -55,7 +55,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function BlogDetails({ blog }) {
   const { dispatch } = useBlogsContext();
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState(null);
   const handleDelete = async () => {
     const response = await fetch('/api/blogs/' + blog._id, { 
       method: 'DELETE'

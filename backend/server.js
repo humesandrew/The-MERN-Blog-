@@ -6,6 +6,8 @@ const app = express();
 const mongoose = require("mongoose");
 
 const blogRoutes = require("./routes/blogs");
+const userRoutes = require("./routes/user");
+
 
 // require .env//
 require("dotenv").config();
@@ -20,6 +22,8 @@ app.use(express.json());
 
 //prepend api/blogs to all requests to blogRoutes//
 app.use("/api/blogs", blogRoutes);
+app.use("/api/user", userRoutes);
+
 
 // connect to db now using mongoose, and make sure db is connected before we listen to requests//
 mongoose

@@ -1,6 +1,7 @@
 
 import * as React from "react";
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -11,10 +12,14 @@ import "./signup.css";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {signup, error, isLoading} = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+
+    await signup(email, password);
+    //use custom hook useSignup for signup logic//
+  
   };
 
   return (
@@ -58,10 +63,12 @@ const Signup = () => {
       onChange={(e) => setPassword(e.target.value)}
       // className={emptyFields.includes("author") ? "errorForm" : ""}
     />
-    <Button variant="contained" onClick={handleSubmit}>
+
+    {/* set up the button to display any error we get back and also disable the button when isLoading is true. */}
+    <Button variant="contained" disabled={isLoading} onClick={handleSubmit}>
       Submit
     </Button>
-   
+   {error && <div className="error">{error}</div>}
   </Box>
   );
 };

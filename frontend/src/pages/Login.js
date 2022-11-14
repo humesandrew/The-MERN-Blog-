@@ -1,4 +1,10 @@
 import { useState } from "react";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
+import "./login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,22 +16,51 @@ const Login = () => {
   };
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
-      <h3>Login</h3>
-      <label>Email</label>
-      <input
-        type="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      ></input>
-      <label>Password</label>
-      <input
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      ></input>
-      <button>Login</button>
-    </form>
+    <Box
+    component="form"
+    sx={{
+      "& > :not(style)": { m: 1, width: "25ch" },
+    }}
+    noValidate
+    autoComplete="off"
+    className="loginform"
+  >
+    <Typography
+      variant="h5"
+      noWrap
+      component="span"
+      sx={{
+        flexGrow: 1,
+        display: { xs: "block", sm: "block" },
+        textAlign: "center",
+      }}
+    >
+      Login
+    </Typography>
+    <TextField
+      id="outlined-basic"
+      variant="outlined"
+      label="Email"
+      multiline
+      maxRows={2}
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      // className={emptyFields.includes("title") ? "errorForm" : ""}
+    />
+
+    <TextField
+      id="outlined-basic"
+      variant="outlined"
+      label="Password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      // className={emptyFields.includes("author") ? "errorForm" : ""}
+    />
+    <Button variant="contained" onClick={handleSubmit}>
+      Submit
+    </Button>
+   
+  </Box>
   );
 };
 

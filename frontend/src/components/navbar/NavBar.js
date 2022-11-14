@@ -11,6 +11,7 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
+
 import "./navbar.css";
 
 const Search = styled("div")(({ theme }) => ({
@@ -79,10 +80,37 @@ export default function NavBar() {
               textAlign: "center",
             }}
           >
-            <Link to="/" className="link">
+                <Link to="/" className="link">
               <h2>The MERN Blog </h2>{" "}
             </Link>
-          </Typography>
+            </Typography>
+            <div className="linksDiv">
+            <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/login"
+            sx={{
+              flexGrow: 1,
+              display: { xs: "block", sm: "block" },
+              textAlign: "center",
+              textDecoration: "none"
+            }}
+          >Login</Typography>
+             <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/signup"
+            sx={{
+              flexGrow: 1,
+              display: { xs: "block", sm: "block" },
+              textAlign: "center",
+              textDecoration: "none"
+            }}
+          >Signup</Typography>
+          </div>
+          
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

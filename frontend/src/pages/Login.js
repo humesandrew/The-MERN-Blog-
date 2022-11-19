@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -9,10 +10,13 @@ import "./login.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {login, error, isLoading} = useLogin();
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    await login(email, password)
   };
 
   return (
@@ -56,10 +60,10 @@ const Login = () => {
       onChange={(e) => setPassword(e.target.value)}
       // className={emptyFields.includes("author") ? "errorForm" : ""}
     />
-    <Button variant="contained" onClick={handleSubmit}>
+    <Button variant="contained" onClick={handleSubmit} disabled={isLoading}>
       Submit
     </Button>
-   
+    {error && <div className="error">{error}</div>}
   </Box>
   );
 };

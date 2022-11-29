@@ -86,7 +86,7 @@ export default function NavBar() {
             </Link>
           </Typography>
           <div className="linksDiv">
-            {/* <Typography
+            <Typography
               variant="h6"
               noWrap
               component={Link}
@@ -99,7 +99,7 @@ export default function NavBar() {
               }}
             >
               Login
-            </Typography> */}
+            </Typography>
             <Typography
               variant="h6"
               noWrap

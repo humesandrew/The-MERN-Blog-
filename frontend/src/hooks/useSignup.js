@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
-export const useLogin = () => {
+export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const login = async (email, password) => {
+  const signup = async (email, password) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/api/user/login", {
+    const response = await fetch("/api/user/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -32,6 +32,6 @@ export const useLogin = () => {
     }
   };
 
-  return { login, isLoading, error };
+  return { signup, isLoading, error };
   // so we can grab all these 3 things from this hook //
 };

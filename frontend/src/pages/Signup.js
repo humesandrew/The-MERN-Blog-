@@ -1,20 +1,24 @@
 
 import * as React from "react";
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-import "./signup.css";
+// import "./signup.css";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {signup, error, isLoading} = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
     console.log(email, password);
+    await signup(email, password);
   };
 
   return (
@@ -61,7 +65,7 @@ const Signup = () => {
     <Button variant="contained" onClick={handleSubmit}>
       Submit
     </Button>
-   
+   {error && <div className="error">{error}</div>}
   </Box>
   );
 };

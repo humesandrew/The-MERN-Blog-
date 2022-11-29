@@ -52,7 +52,7 @@ userSchema.statics.login = async function (email, password) {
   const user = await this.findOne({ email });
 
   if (!user) {
-    throw Error("Invalid email0");
+    throw Error("Invalid email");
   }
 
   // use bcrypt method 'compare' to compare plain text to hashed password//

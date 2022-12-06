@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useLogout } from '../../hooks/useLogout';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
@@ -59,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const { logout } = useLogout();
+  const { user } = useAuthContext();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className="navbar">
@@ -88,7 +90,7 @@ export default function NavBar() {
             </Link>
           </Typography>
           <div className="linksDiv">
-            <Typography
+           {!user && (<div><Typography
               variant="h6"
               noWrap
               component={Link}
@@ -115,8 +117,8 @@ export default function NavBar() {
               }}
             >
               Signup
-            </Typography>
-            <Button
+            </Typography></div>)}
+            {user && (<div className='signedinDiv'> <Button
               variant="outlined"
               onClick={() => {
                logout()
@@ -124,6 +126,7 @@ export default function NavBar() {
             >
               Logout
             </Button>
+           <span>{user.email}</span></div>)}
           </div>
 
           <Search>

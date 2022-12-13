@@ -10,6 +10,12 @@ const {
 } = require("../controllers/blogController");
 //so the home route ('/') is prepended with '/api/blogs' ///
 
+const requireAuth = require("../middleware/requireAuth");
+
+// require auth for all workout routes//
+router.use(requireAuth);
+
+
 // to GET all blogs //
 // we just going to use getBlogs because that has our find({}) fxn (in the controller) //
 router.get("/", getBlogs);

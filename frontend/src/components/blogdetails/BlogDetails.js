@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import { useBlogsContext } from "../../hooks/useBlogsContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./blogdetails.css";
 
 const Accordion = styled((props) => (
@@ -52,10 +53,15 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function BlogDetails({ blog }) {
   const { dispatch } = useBlogsContext();
+  const { user } = useAuthContext();
   const [expanded, setExpanded] = React.useState(null);
   const handleDelete = async () => {
+    if (!user) {
+      return
+    }
     const response = await fetch("/api/blogs/" + blog._id, {
       method: "DELETE",
+      headers: {"Authorization": `Bearer ${user.token}`}
     });
     const json = await response.json();
     //the json data will be the document that was just deleted//

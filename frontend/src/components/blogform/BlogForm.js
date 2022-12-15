@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 import { useBlogsContext } from "../../hooks/useBlogsContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./blogform.css";
 
 // this line const { dispatch } fixed it so that the db updates in sync, but still it throws the//
@@ -12,6 +13,7 @@ import "./blogform.css";
 
 export default function BlogForm() {
   const { dispatch } = useBlogsContext();
+  const { user } = useAuthContext();
   const [title, setTitle] = React.useState("");
   const [body, setBody] = React.useState("");
   const [author, setAuthor] = React.useState("");
@@ -20,11 +22,17 @@ export default function BlogForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setError('You must be logged in.');
+      return
+    }
     const blog = { title, body, author };
     const response = await fetch("api/blogs/", {
       method: "POST",
       body: JSON.stringify(blog),
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 
+      "Authorization": `Bearer ${user.token}` },
+      
     });
     const json = await response.json();
     if (!response.ok) {

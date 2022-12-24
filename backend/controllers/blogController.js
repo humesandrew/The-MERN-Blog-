@@ -54,7 +54,8 @@ const createBlog = async (req, res) => {
   }
 
   try {
-    const blog = await Blog.create({ title, body, author });
+    const user_id = req.user._id;
+    const blog = await Blog.create({ title, body, author, user_id });
     res.status(200).json(blog);
   } catch (error) {
     res.status(400).json({ error: error.message });

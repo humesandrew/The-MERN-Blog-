@@ -3,6 +3,13 @@ const mongoose = require("mongoose");
 
 // Controller for GET all //
 const getBlogs = async (req, res) => {
+// this will add fxn to display only blogs from the logged in user //
+// add pass user_id into Blog.find on line 14 to only show that users blog//
+// i'm going to try to use this to conditionally render the Delete post button//
+const user_id = req.user._id;
+
+
+
   // this line will use Blog model to get all blogs (so empty curly braces for Mongo to get all)//
   // and then return returns sorted by time created, newest first (the -1).//
   const blogs = await Blog.find({}).sort({ createdAt: -1 });

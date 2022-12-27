@@ -54,6 +54,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function BlogDetails({ blog }) {
   const { dispatch } = useBlogsContext();
   const { user } = useAuthContext();
+  
   const [expanded, setExpanded] = React.useState(null);
   const handleDelete = async () => {
     if (!user) {
@@ -105,13 +106,13 @@ export default function BlogDetails({ blog }) {
                   <Typography sx={{ marginRight: 3 }} component="div">
                     Written by: {blog.author}
                   </Typography>
-                  <Chip
+                 {user ? <Chip
                     label="Delete post"
                     onClick={handleDelete}
                     onDelete={handleDelete}
                     deleteIcon={<DeleteIcon />}
                     variant="outlined"
-                  ></Chip>
+                  ></Chip> : null}
                 </div>
               </div>
             </AccordionDetails>
